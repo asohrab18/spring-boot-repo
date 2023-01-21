@@ -40,4 +40,12 @@ public class Course {
 		this.author = author;
 	}
 
+	@Override
+	public String toString() {
+		return "id = " + id + "\tname = " + name + "\tauthor = " + author + "\n";
+	}
+	
+	
+	
+
 }

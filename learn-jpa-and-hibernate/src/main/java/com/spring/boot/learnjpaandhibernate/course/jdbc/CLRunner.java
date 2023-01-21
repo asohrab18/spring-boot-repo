@@ -17,9 +17,11 @@ public class CLRunner implements CommandLineRunner {
 		repository.insert(new Course(101L, "AWS Cloud", "Kaushik"));
 		repository.insert(new Course(102L, "Microservices", "Ranga"));
 		repository.insert(new Course(103L, "Spring Boot", "Naveen"));
-		
-		
+
 		repository.deleteById(102L);
+
+		System.out.println("\n\n\n--------------------------------------------------------------------------------\n"+repository.findById(101L));
+		System.out.println(repository.findById(103L));
 	}
 
 }
