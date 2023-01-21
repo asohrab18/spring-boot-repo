@@ -4,13 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.spring.boot.learnjpaandhibernate.beans.Course;
+
 @Repository
 public class CourseJdbcRepository {
 
 	@Autowired
 	private JdbcTemplate springJdbcTemplate;
 
-	public void insert() {
-		springJdbcTemplate.update("Insert into COURSE (id, name, author) values(1, 'Spring Boot and Microservices', 'Ranga');");
+	private static String INSERT_QUERY = "Insert into COURSE (id, name, author) values(?,?,?);";
+
+	private static String DELETE_QUERY = "Delete From COURSE WHERE id = ?;";
+
+	public void insert(Course course) {
+		springJdbcTemplate.update(INSERT_QUERY, course.getId(), course.getName(), course.getAuthor());
+	}
+
+	public void deleteById(Long id) {
+		springJdbcTemplate.update(DELETE_QUERY, id);
 	}
 }
