@@ -1,16 +1,16 @@
 package com.spring.boot.learnjpaandhibernate.course.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.spring.boot.learnjpaandhibernate.beans.Course;
+//import com.spring.boot.learnjpaandhibernate.beans.Course;
 
 @Component
 public class CLRunnerForJpa implements CommandLineRunner {
 
-	@Autowired
-	private CourseJpaRepository repository;
+	//@Autowired
+	//private CourseJpaRepository repository;
 	
 	@Override
 	public void run(String... args) throws Exception {
