@@ -1,0 +1,3 @@
+http://localhost:8002/greetings/hello
+http://localhost:8002/greetings/hello-bean
+http://localhost:8002/greetings/hello/path-variable/Sohrab
