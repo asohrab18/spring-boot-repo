@@ -3,7 +3,6 @@ package com.boot.spring.restfulwebservices.dao;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -29,11 +28,7 @@ public class UserDaoService {
 		if (id == null || id == 0) {
 			return null;
 		}
-		Optional<User> userOpt = users.stream().filter(u -> u.getId() == id).findFirst();
-		if (userOpt.isPresent()) {
-			return userOpt.get();
-		}
-		return null;
+		return users.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
 	}
 
 	public User save(User user) {
