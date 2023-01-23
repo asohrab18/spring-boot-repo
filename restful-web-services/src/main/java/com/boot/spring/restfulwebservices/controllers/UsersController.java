@@ -18,6 +18,8 @@ import com.boot.spring.restfulwebservices.beans.User;
 import com.boot.spring.restfulwebservices.dao.UserDaoService;
 import com.boot.spring.restfulwebservices.exceptions.UserNotFoundException;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UsersController {
 
@@ -52,7 +54,7 @@ public class UsersController {
 	}
 
 	@PostMapping("v1/users")
-	public ResponseEntity<User> createUserV1(@RequestBody User user) {
+	public ResponseEntity<User> createUserV1(@Valid @RequestBody User user) {
 		User savedUser = userDaoService.save(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
@@ -61,7 +63,7 @@ public class UsersController {
 	}
 
 	@PostMapping("v2/users")
-	public ResponseEntity<User> createUserV2(@RequestBody User user) {
+	public ResponseEntity<User> createUserV2(@Valid @RequestBody User user) {
 		User savedUser = userDaoService.save(user);
 		return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
 	}
