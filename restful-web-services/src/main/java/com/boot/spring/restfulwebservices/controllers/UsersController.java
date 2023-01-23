@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class UsersController {
 	}
 
 	@GetMapping("v1/users/{id}")
-	public User getUserById(@PathVariable("id") Integer id) {
+	public User getUser(@PathVariable("id") Integer id) {
 		User user = userDaoService.findById(id);
 		if (user == null) {
 			throw new UserNotFoundException("data not found for id = " + id);
@@ -42,7 +43,7 @@ public class UsersController {
 	}
 
 	@GetMapping("v2/users/{id}")
-	public ResponseEntity<User> getUserByIdV2(@PathVariable("id") Integer id) {
+	public ResponseEntity<User> getUserV2(@PathVariable("id") Integer id) {
 		User user = userDaoService.findById(id);
 		if (user == null) {
 			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
@@ -64,5 +65,10 @@ public class UsersController {
 	public ResponseEntity<User> createUserV2(@RequestBody User user) {
 		User savedUser = userDaoService.save(user);
 		return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("v1/users/{id}")
+	public void deleteUser(@PathVariable("id") Integer id) {
+		userDaoService.deleteById(id);
 	}
 }

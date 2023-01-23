@@ -3,6 +3,7 @@ package com.boot.spring.restfulwebservices.dao;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
 
@@ -35,5 +36,12 @@ public class UserDaoService {
 		user.setId(++userCount);
 		users.add(user);
 		return user;
+	}
+
+	public void deleteById(Integer id) {
+		if (id != null && id != 0) {
+			Predicate<? super User> predicate = u -> u.getId() == id;
+			users.removeIf(predicate);
+		}
 	}
 }
