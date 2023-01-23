@@ -55,8 +55,7 @@ public class UsersController {
 	public ResponseEntity<User> createUserV1(@RequestBody User user) {
 		User savedUser = userDaoService.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
-				.toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
@@ -68,7 +67,7 @@ public class UsersController {
 	}
 	
 	@DeleteMapping("v1/users/{id}")
-	public void deleteUser(@PathVariable("id") Integer id) {
-		userDaoService.deleteById(id);
+	public String deleteUser(@PathVariable("id") Integer id) {
+		return userDaoService.deleteById(id);
 	}
 }

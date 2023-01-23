@@ -38,10 +38,18 @@ public class UserDaoService {
 		return user;
 	}
 
-	public void deleteById(Integer id) {
-		if (id != null && id != 0) {
-			Predicate<? super User> predicate = u -> u.getId() == id;
-			users.removeIf(predicate);
+	public String deleteById(Integer id) {
+		String message = "";
+		if (id == 0) {
+			message = "id = " + id + " does not exist.";
 		}
+		Predicate<? super User> predicate = u -> u.getId() == id;
+		boolean removed = users.removeIf(predicate);
+		if (removed) {
+			message = "id = " + id + " related data deleted";
+		} else {
+			message = "id = " + id + " does not exist.";
+		}
+		return message;
 	}
 }
