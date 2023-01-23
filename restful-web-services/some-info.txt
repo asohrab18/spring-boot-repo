@@ -5,10 +5,17 @@ http://localhost:8002/greetings/v2/hello/Sohrab
 http://localhost:8002/v1/users
 http://localhost:8002/v1/users/1
 
-POST REQUEST:
+POST REQUESTS:
 http://localhost:8002/v1/users
 BODY (Raw, JSON):
 {
     "name": "Mukesh",
     "birthDate": "2001-01-02T01:00:00"
+}
+
+http://localhost:8002/v2/users
+BODY (Raw, JSON):
+{
+    "name": "John",
+    "birthDate": "2010-10-10T10:00:00"
 }
