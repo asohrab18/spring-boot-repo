@@ -1,12 +1,12 @@
-http://localhost:8002/greetings/hello
-http://localhost:8002/greetings/hello-bean
-http://localhost:8002/greetings/hello/path-variable/Sohrab
+http://localhost:8002/greetings/v1/hello
+http://localhost:8002/greetings/v1/hello-bean
+http://localhost:8002/greetings/v2/hello/Sohrab
 
-http://localhost:8002/users
-http://localhost:8002/users/1
+http://localhost:8002/v1/users
+http://localhost:8002/v1/users/1
 
 POST REQUEST:
-http://localhost:8002/users
+http://localhost:8002/v1/users
 BODY (Raw, JSON):
 {
     "name": "Mukesh",

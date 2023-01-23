@@ -11,17 +11,17 @@ import com.boot.spring.restfulwebservices.beans.Greeting;
 @RequestMapping("greetings")
 public class GreetingsController {
 
-	@GetMapping("/hello")
+	@GetMapping("v1/hello")
 	public String greet() {
 		return "Hello World!";
 	}
 
-	@GetMapping("/hello-bean")
+	@GetMapping("v1/hello-bean")
 	public Greeting greetByBean() {
 		return new Greeting("Hello World!");
 	}
 
-	@GetMapping("/hello/path-variable/{name}")
+	@GetMapping("v2/hello/{name}")
 	public String greetUser(@PathVariable("name") String userName) {
 		return "Hello " + userName + "!";
 	}
