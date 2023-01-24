@@ -56,8 +56,13 @@ http://localhost:8002/filtering/bean-list
 http://localhost:8002/filtering/employee
 http://localhost:8002/filtering/employees-list
 
+
 ACTUATOR:
 http://localhost:8002/actuator
+
+
+HAL EXPLORER:
+http://localhost:8002/explorer/index.html
 
 
 POST REQUESTS:
