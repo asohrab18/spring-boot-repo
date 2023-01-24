@@ -1,6 +1,7 @@
 SWAGGER DOC REQUEST:
 http://localhost:8002/swagger-ui.html
 
+
 GET REQUESTS:
 http://localhost:8002/greetings/v1/hello
 http://localhost:8002/greetings/v1/hello-bean
@@ -10,15 +11,40 @@ http://localhost:8002/v1/users
 http://localhost:8002/v1/users/1
 http://localhost:8002/v2/users/1
 
+
 INTERNATIONALIZATION (i18n):
 http://localhost:8002/greetings/i18n/hello
-
 Headers:
 Accept-Language:fr
 Accept-Language:ger
 
-DELETE REQUESTS	:
-http://localhost:8002/v1/users/1
+
+URI VERSIONING:
+http://localhost:8002/versioning/v1/person
+http://localhost:8002/versioning/v2/person
+
+REQUEST PARAMETER VERSIONING:
+http://localhost:8002/versioning/person?version=1
+http://localhost:8002/versioning/person?version=2
+
+HEADER VERSIONING:
+http://localhost:8002/versioning/header/person
+Headers:
+X_API_VERSION:1
+
+http://localhost:8002/versioning/header/person
+Headers:
+X_API_VERSION:2
+
+ACCEPT HEADER VERSIONING:
+http://localhost:8002/versioning/accept/person
+Headers:
+Accept:application/www.rsystems.com-v1+json
+
+http://localhost:8002/versioning/accept/person
+Headers:
+Accept:application/www.rsystems.com-v2+json
+
 
 POST REQUESTS:
 http://localhost:8002/v1/users
@@ -34,3 +60,7 @@ BODY (Raw, JSON):
     "name": "John",
     "birthDate": "2010-10-10T10:00:00"
 }
+
+
+DELETE REQUESTS	:
+http://localhost:8002/v1/users/1
