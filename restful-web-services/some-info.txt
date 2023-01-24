@@ -50,11 +50,15 @@ HATEOAS FOR LINKS:
 http://localhost:8002/hateoas/users/1
 
 
-STATIC FILTERING:
+FILTERING:
 http://localhost:8002/filtering/bean
 http://localhost:8002/filtering/bean-list
 http://localhost:8002/filtering/employee
 http://localhost:8002/filtering/employees-list
+
+ACTUATOR:
+http://localhost:8002/actuator
+
 
 POST REQUESTS:
 http://localhost:8002/v1/users
