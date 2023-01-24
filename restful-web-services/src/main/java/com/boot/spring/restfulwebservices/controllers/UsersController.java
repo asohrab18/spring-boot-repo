@@ -2,8 +2,8 @@ package com.boot.spring.restfulwebservices.controllers;
 
 import java.net.URI;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.boot.spring.restfulwebservices.beans.User;
 import com.boot.spring.restfulwebservices.dao.UserDaoService;
 import com.boot.spring.restfulwebservices.exceptions.UserNotFoundException;
-
 import jakarta.validation.Valid;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
 public class UsersController {
@@ -51,6 +51,18 @@ public class UsersController {
 			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@GetMapping("hateoas/users/{id}")
+	public EntityModel<User> getUserByHateoas(@PathVariable("id") Integer id) {
+		User user = userDaoService.findById(id);
+		if (user == null) {
+			throw new UserNotFoundException("data not found for id = " + id);
+		}
+		EntityModel<User> entityModel = EntityModel.of(user);
+		WebMvcLinkBuilder webMvcLinkBuilder = linkTo(methodOn(this.getClass()).getAllUsers());
+		entityModel.add(webMvcLinkBuilder.withRel("all-users"));
+		return entityModel;
 	}
 
 	@PostMapping("v1/users")

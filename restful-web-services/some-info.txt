@@ -46,6 +46,10 @@ Headers:
 Accept:application/www.rsystems.com-v2+json
 
 
+HATEOAS FOR LINKS:
+http://localhost:8002/hateoas/users/1
+
+
 POST REQUESTS:
 http://localhost:8002/v1/users
 BODY (Raw, JSON):
