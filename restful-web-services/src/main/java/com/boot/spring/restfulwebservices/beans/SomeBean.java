@@ -1,14 +1,17 @@
 package com.boot.spring.restfulwebservices.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@JsonFilter("someBeanFilter")
 public class SomeBean {
 
 	private String field1;
-	
-	@JsonIgnore
+
+	// @JsonIgnore
 	private String field2;
-	
+
 	private String field3;
 
 	public SomeBean() {
