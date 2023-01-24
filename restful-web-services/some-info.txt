@@ -50,6 +50,11 @@ HATEOAS FOR LINKS:
 http://localhost:8002/hateoas/users/1
 
 
+STATIC FILTERING:
+http://localhost:8002/filtering/bean
+http://localhost:8002/filtering/bean-list
+
+
 POST REQUESTS:
 http://localhost:8002/v1/users
 BODY (Raw, JSON):
