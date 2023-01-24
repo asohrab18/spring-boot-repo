@@ -53,7 +53,8 @@ http://localhost:8002/hateoas/users/1
 STATIC FILTERING:
 http://localhost:8002/filtering/bean
 http://localhost:8002/filtering/bean-list
-
+http://localhost:8002/filtering/employee
+http://localhost:8002/filtering/employees-list
 
 POST REQUESTS:
 http://localhost:8002/v1/users
