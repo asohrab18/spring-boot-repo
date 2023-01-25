@@ -11,6 +11,13 @@ http://localhost:8002/v1/users
 http://localhost:8002/v1/users/1
 http://localhost:8002/v2/users/1
 
+JPA:
+http://localhost:8002/jpa/v1/users-details
+http://localhost:8002/jpa/v1/users-details/10001
+http://localhost:8002/jpa/v2/users-details/10001
+http://localhost:8002/jpa/hateoas/users-details/10001
+http://localhost:8002/jpa/v1/users-details/10001/designations
+
 
 INTERNATIONALIZATION (i18n):
 http://localhost:8002/greetings/i18n/hello
@@ -69,17 +76,35 @@ POST REQUESTS:
 http://localhost:8002/v1/users
 BODY (Raw, JSON):
 {
-    "name": "Mukesh",
-    "birthDate": "2001-01-02T01:00:00"
+    "user_name": "Alizabeth",
+    "date_of_birth": "2010-10-10T10:00:00"
 }
 
 http://localhost:8002/v2/users
 BODY (Raw, JSON):
 {
-    "name": "John",
-    "birthDate": "2010-10-10T10:00:00"
+    "user_name": "John",
+    "date_of_birth": "2019-10-10T10:00:00"
+}
+
+http://localhost:8002/jpa/v1/users-details
+BODY (Raw, JSON):
+{
+    "user_name": "David",
+    "date_of_birth": "2020-10-10T10:00:00"
+}
+
+http://localhost:8002/jpa/v2/users-details
+BODY (Raw, JSON):
+{
+    "user_name": "Zen",
+    "date_of_birth": "2022-10-10T10:00:00"
 }
 
 
 DELETE REQUESTS	:
 http://localhost:8002/v1/users/1
+http://localhost:8002/jpa/v1/users-details/10001
+
+H2 CONSOLE (In-Memory DB):
+http://localhost:8002/h2-console
