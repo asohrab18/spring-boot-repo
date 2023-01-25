@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.boot.spring.restfulwebservices.beans.Designation;
 import com.boot.spring.restfulwebservices.beans.UserDetails;
+import com.boot.spring.restfulwebservices.dao.DesignationRepository;
 import com.boot.spring.restfulwebservices.dao.UserDetailsRepository;
 import com.boot.spring.restfulwebservices.exceptions.UserNotFoundException;
 
@@ -33,6 +34,14 @@ public class UserDetailsController {
 	@Autowired
 	private UserDetailsRepository userDetailsRepository;
 
+	@Autowired
+	private DesignationRepository designationRepository;
+	
+	public UserDetailsController(UserDetailsRepository userDetailsRepository,DesignationRepository designationRepository) {
+		this.userDetailsRepository=userDetailsRepository;
+		this.designationRepository=designationRepository;
+	}
+	
 	@GetMapping("jpa/v1/users-details")
 	public ResponseEntity<List<UserDetails>> getAllUserDetails() {
 		List<UserDetails> userDetailsList = userDetailsRepository.findAll();
@@ -104,5 +113,19 @@ public class UserDetailsController {
 			throw new UserNotFoundException("data not found for id = " + id);
 		}
 		return userDetailsOpt.get().getDesignations();
+	}
+	
+	@PostMapping("jpa/v1/users-details/{id}/designations")
+	public ResponseEntity<Object> createUserDetailsV1(@PathVariable("id") Integer id,
+			@Valid @RequestBody Designation designation) {
+		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
+		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
+			throw new UserNotFoundException("data not found for id = " + id);
+		}
+		designation.setUserDetails(userDetailsOpt.get());
+		Designation savedDesignation = designationRepository.save(designation);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedDesignation.getDesignationId()).toUri();
+
+		return ResponseEntity.created(location).build();
 	}
 }

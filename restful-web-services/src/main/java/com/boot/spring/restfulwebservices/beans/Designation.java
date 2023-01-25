@@ -7,14 +7,16 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Designation {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer designationId;
 
+	@Size(min = 10)
 	private String description;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -24,18 +26,19 @@ public class Designation {
 	public Designation() {
 	}
 
-	public Designation(Integer id, String description) {
+	public Designation(Integer designationId, String description, UserDetails userDetails) {
 		super();
-		this.id = id;
+		this.designationId = designationId;
 		this.description = description;
+		this.userDetails = userDetails;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getDesignationId() {
+		return designationId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setDesignationId(Integer designationId) {
+		this.designationId = designationId;
 	}
 
 	public String getDescription() {

@@ -101,6 +101,12 @@ BODY (Raw, JSON):
     "date_of_birth": "2022-10-10T10:00:00"
 }
 
+http://localhost:8002/jpa/v1/users-details/10001/designations
+BODY (Raw, JSON):
+{
+    "description":"I am working on Azure DevOps & Hosted Database."
+}
+
 
 DELETE REQUESTS	:
 http://localhost:8002/v1/users/1
