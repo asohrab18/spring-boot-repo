@@ -1,5 +1,6 @@
 SOURCE URL is https://rsystemsindia.udemy.com/course/microservices-with-spring-boot-and-spring-cloud
 
+http://localhost:8000/logs
 http://localhost:8000/university/courses
 http://localhost:8000/configurations/currency-service
 http://localhost:8000/actuator

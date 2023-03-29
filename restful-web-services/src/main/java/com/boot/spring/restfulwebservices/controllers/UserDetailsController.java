@@ -7,6 +7,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -31,6 +33,8 @@ import jakarta.validation.Valid;
 @RestController
 public class UserDetailsController {
 
+	Logger logger = LoggerFactory.getLogger(UserDetailsController.class);
+	
 	@Autowired
 	private UserDetailsRepository userDetailsRepository;
 
@@ -44,6 +48,7 @@ public class UserDetailsController {
 	
 	@GetMapping("jpa/v1/users-details")
 	public ResponseEntity<List<UserDetails>> getAllUserDetails() {
+		logger.info("An INFO Message");
 		List<UserDetails> userDetailsList = userDetailsRepository.findAll();
 		if (userDetailsList.isEmpty()) {
 			return new ResponseEntity<List<UserDetails>>(userDetailsList, HttpStatus.NOT_FOUND);
@@ -53,6 +58,7 @@ public class UserDetailsController {
 
 	@GetMapping("jpa/v1/users-details/{id}")
 	public UserDetails getUserDetails(@PathVariable("id") Integer id) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			throw new UserNotFoundException("data not found for id = " + id);
@@ -62,6 +68,7 @@ public class UserDetailsController {
 
 	@GetMapping("jpa/v2/users-details/{id}")
 	public ResponseEntity<UserDetails> getUserDetailsV2(@PathVariable("id") Integer id) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			return new ResponseEntity<UserDetails>(userDetailsOpt.orElse(null), HttpStatus.NOT_FOUND);
@@ -71,6 +78,7 @@ public class UserDetailsController {
 	
 	@GetMapping("jpa/hateoas/users-details/{id}")
 	public EntityModel<UserDetails> getUserDetailsByHateoas(@PathVariable("id") Integer id) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			throw new UserNotFoundException("data not found for id = " + id);
@@ -83,21 +91,22 @@ public class UserDetailsController {
 
 	@PostMapping("jpa/v1/users-details")
 	public ResponseEntity<UserDetails> createUserDetailsV1(@Valid @RequestBody UserDetails userDetails) {
+		logger.info("An INFO Message");
 		UserDetails savedUserDetails = userDetailsRepository.save(userDetails);
-
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUserDetails.getId()).toUri();
-
 		return ResponseEntity.created(location).build();
 	}
 
 	@PostMapping("jpa/v2/users-details")
 	public ResponseEntity<UserDetails> createUserDetailsV2(@Valid @RequestBody UserDetails userDetails) {
+		logger.info("An INFO Message");
 		UserDetails savedUserDetails = userDetailsRepository.save(userDetails);
 		return new ResponseEntity<UserDetails>(savedUserDetails, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("jpa/v1/users-details/{id}")
 	public String deleteUserDetails(@PathVariable("id") Integer id) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			throw new UserNotFoundException("data not found for id = " + id);
@@ -108,6 +117,7 @@ public class UserDetailsController {
 	
 	@GetMapping("jpa/v1/users-details/{id}/designations")
 	public List<Designation> getDesignationOfUser(@PathVariable("id") Integer id) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			throw new UserNotFoundException("data not found for id = " + id);
@@ -118,6 +128,7 @@ public class UserDetailsController {
 	@PostMapping("jpa/v1/users-details/{id}/designations")
 	public ResponseEntity<Object> createUserDetailsV1(@PathVariable("id") Integer id,
 			@Valid @RequestBody Designation designation) {
+		logger.info("An INFO Message");
 		Optional<UserDetails> userDetailsOpt = userDetailsRepository.findById(id);
 		if (!userDetailsOpt.isPresent() || userDetailsOpt.isEmpty()) {
 			throw new UserNotFoundException("data not found for id = " + id);

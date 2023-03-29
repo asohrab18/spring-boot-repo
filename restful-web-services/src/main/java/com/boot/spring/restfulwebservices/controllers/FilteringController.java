@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +19,11 @@ import com.boot.spring.restfulwebservices.utilities.AppUtil;
 @RequestMapping("filtering")
 public class FilteringController {
 
+	Logger logger = LoggerFactory.getLogger(FilteringController.class);
+	
 	@GetMapping("bean")
 	public MappingJacksonValue filteringOfBean() {
+		logger.info("An INFO Message");
 		SomeBean someBean = new SomeBean("value1", "value2", "value3");
 		String[] exceptFields = { "field1", "field2" };
 		MappingJacksonValue mappingJacksonValue = AppUtil.filterDynamically(someBean, "someBeanFilter", exceptFields);
@@ -27,6 +32,7 @@ public class FilteringController {
 
 	@GetMapping("bean-list")
 	public MappingJacksonValue filteringListOfBean() {
+		logger.info("An INFO Message");
 		List<SomeBean> someBeanList = Arrays.asList(new SomeBean("value1", "value2", "value3"), new SomeBean("value4", "value5", "value6"), 
 				new SomeBean("value7", "value8", "value9"));
 		String[] exceptFields = { "field2", "field3" };
@@ -36,6 +42,7 @@ public class FilteringController {
 	
 	@GetMapping("employee")
 	public MappingJacksonValue getEmployeeDetails() {
+		logger.info("An INFO Message");
 		Employee employee = new Employee("john123", "cena@007", "+91 9897123456",150000D,LocalDateTime.now().minusYears(30));
 		String[] exceptFields = { "username", "mobileNo", "dob" };
 		MappingJacksonValue mappingJacksonValue = AppUtil.filterDynamically(employee, "employeeFilter", exceptFields);
@@ -44,6 +51,7 @@ public class FilteringController {
 	
 	@GetMapping("employees-list")
 	public MappingJacksonValue getEmployeesList() {
+		logger.info("An INFO Message");
 		Employee employee1 = new Employee("john123", "cena@007", "+91 9897123456",150000D,LocalDateTime.now().minusYears(30));
 		Employee employee2 = new Employee("ana987", "julie_231", "+61 8734562190",200000D,LocalDateTime.now().minusYears(60));
 		List<Employee> employeesList = Arrays.asList(employee1, employee2);
